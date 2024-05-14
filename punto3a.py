@@ -137,3 +137,4 @@ print("Utilidad máxima: ", lp.value(modelo.objective))
 print("Litros de bebida de coco: ", x.varValue)
 print("Litros de bebida de almendra: ", y.varValue)
 
+
