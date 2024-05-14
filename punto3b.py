@@ -55,6 +55,7 @@ plt.plot(capacidades, valores_optimos, marker='o', linestyle='-', color='b')
 plt.title('Valor Óptimo de la Función Objetivo en Función de la Capacidad de Producción')
 plt.xlabel('Capacidad de Producción (litros)')
 plt.ylabel('Valor Óptimo de la Función Objetivo (COP)')
+plt.xticks(capacidades)
 plt.grid(True)
 plt.show()
 
@@ -62,3 +63,4 @@ plt.show()
 pendiente = (valores_optimos[-1] - valores_optimos[0]) / (capacidades[-1] - capacidades[0])
 
 print(f'La pendiente de la recta es: {pendiente:.2f} COP/litro')
+
