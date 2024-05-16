@@ -21,11 +21,11 @@ D_pasta = 15.2
 D_tiempo = 720
 
 # Listas para guardar los resultados
-capacidades = list(range(0, 101, 5))
-valores_optimos = []
+capacidades = list(range(0, 101, 5)) # Capacidad de producción en litros
+valores_optimos = [] # Valor óptimo de la función objetivo
 
 # Iterar sobre diferentes valores de capacidad de producción
-for c in capacidades:
+for c in capacidades: 
     # Crear el modelo
     modelo = lp.LpProblem("VeggieDrinks", lp.LpMaximize)
     
@@ -37,10 +37,25 @@ for c in capacidades:
     modelo += (U_coco * x) + (U_almendra * y)
     
     # Definir las restricciones
-    modelo += a_coco_extracto * x <= D_extracto
-    modelo += a_almendra_pasta * y <= D_pasta
-    modelo += a_coco_agua * x + a_almendra_agua * y <= D_agua
-    modelo += t_coco * x + t_almendra * y <= D_tiempo
+    
+    #1. Restriccion de disponibilidad de extracto de coco para bebida de coco
+
+    modelo += a_coco_extracto*x <= D_extracto
+
+    #2. Restriccion de disponibilidad de pasta de almendra para bebida de almendra
+
+    modelo += a_almendra_pasta*y <= D_pasta
+
+    #3. Restriccion de disponibilidad de agua para ambas bebidas
+
+    modelo += a_coco_agua*x + a_almendra_agua*y <= D_agua
+
+    #4. Restriccion de tiempo de produccion para ambas bebidas
+
+    modelo += t_coco*x + t_almendra*y <= D_tiempo
+
+    #5. Restriccion de capacidad de produccion
+
     modelo += x + y <= c
     
     # Resolver el problema

@@ -1,4 +1,5 @@
 
+
 #Enunciado
 
 """VeggieDrinks es una empresa innovadora que ofrece bebidas
@@ -37,6 +38,14 @@ Teniendo en cuenta el precio de venta, los costos de los insumos y los costos de
 la empresa tiene una utilidad de $12,000 COP y de $9,500 COP por cada litro que venda de
 bebida de coco y de bebida de almendra, respectivamente. Debido a la creciente
 popularidad de VeggieDrinks, la empresa vende todo lo que produce.
+La empresa está considerando lanzar un nuevo producto llamado
+"VeggieFusion", el cual combina bebida vegetal de coco y almendra. Se
+estima que este producto generaría una utilidad de $10,500 COP por cada
+litro. Además, un litro de esta bebida requeriría de 0.06 𝐿 de extracto de
+coco, 0.05 𝐿 de pasta de almendra, 0.09 𝐿 de agua, y 5.5 minutos de tiempo
+de procesamiento. ¿Debería VeggieDrinks producir este nuevo tipo de
+bebida vegetales? Argumente resolviendo el modelo nuevamente y
+mostrando los resultados.
 """
 
 #---------------- Zona de imports ----------------
@@ -49,7 +58,7 @@ import pulp as lp
 
 #Productos
 
-P = ["Coco", "Almendra"]
+P = ["Coco", "Almendra", "VeggieFusion"]
 
 #Recursos
 
@@ -65,13 +74,23 @@ a_coco_extracto = 0.35 #Litros de extracto de coco por litro de coco
 
 a_almendra_pasta = 0.37 #Litros de pasta de almendra por litro de almendra
 
+a_veggiefusion_extracto = 0.06 #Litros de extracto de coco por litro de VeggieFusion
+
+a_veggiefusion_pasta = 0.05 #Litros de pasta de almendra por litro de VeggieFusion
+
+a_veggiefusion_agua = 0.09 #Litros de agua por litro de VeggieFusion
+
 t_coco = 3.4 #Minutos por litro de coco
 
 t_almendra = 2.6 #Minutos por litro de almendra
 
+t_veggiefusion = 5.5 #Minutos por litro de VeggieFusion
+
 U_coco = 12000 #Utilidad por litro de coco
 
 U_almendra = 9500 #Utilidad por litro de almendra
+
+U_veggiefusion = 10500 #Utilidad por litro de VeggieFusion
 
 D_agua = 42 #Litros de agua disponibles
 
@@ -91,32 +110,33 @@ modelo = lp.LpProblem("VeggieDrinks", lp.LpMaximize)
     
 x = lp.LpVariable("Litros de bebida de coco", lowBound = 0, cat = lp.LpContinuous)
 y = lp.LpVariable("Litros de bebida de almendra", lowBound = 0, cat = lp.LpContinuous)
+z = lp.LpVariable("Litros de VeggieFusion", lowBound = 0, cat = lp.LpContinuous)
 
     #Funcion objetivo
     
-modelo += (U_coco*x) + (U_almendra*y)
+modelo += (U_coco*x) + (U_almendra*y) + (U_veggiefusion*z)
 
     #Restricciones
     
-#1. Restriccion de disponibilidad de extracto de coco para bebida de coco
+#1. Restriccion de disponibilidad de extracto de coco para bebida de coco y VeggieFusion
 
-modelo += a_coco_extracto*x <= D_extracto
+modelo += a_coco_extracto*x + a_veggiefusion_extracto*z <= D_extracto
 
-#2. Restriccion de disponibilidad de pasta de almendra para bebida de almendra
+#2. Restriccion de disponibilidad de pasta de almendra para bebida de almendra y VeggieFusion
 
-modelo += a_almendra_pasta*y <= D_pasta
+modelo += a_almendra_pasta*y + a_veggiefusion_pasta*z <= D_pasta
 
-#3. Restriccion de disponibilidad de agua para ambas bebidas
+#3. Restriccion de disponibilidad de agua para las tres bebidas
 
-modelo += a_coco_agua*x + a_almendra_agua*y <= D_agua
+modelo += a_coco_agua*x + a_almendra_agua*y + a_veggiefusion_agua*z <= D_agua
 
-#4. Restriccion de tiempo de produccion para ambas bebidas
+#4. Restriccion de tiempo de produccion para las tres bebidas
 
-modelo += t_coco*x + t_almendra*y <= D_tiempo
+modelo += t_coco*x + t_almendra*y + t_veggiefusion*z <= D_tiempo
 
 #5. Restriccion de capacidad de produccion
 
-modelo += x + y <= c
+modelo += x + y + z <= c
 
     #Solucion
     
@@ -127,6 +147,7 @@ print("Estado: ", lp.LpStatus[modelo.status])
 print("Utilidad máxima: ", lp.value(modelo.objective))
 print("Litros de bebida de coco: ", x.varValue)
 print("Litros de bebida de almendra: ", y.varValue)
+print("Litros de VeggieFusion: ", z.varValue)
 
 #Restricciones activas
 
