@@ -133,3 +133,9 @@ print("Litros de bebida de almendra: ", y.varValue)
 for r in modelo.constraints:
     if modelo.constraints[r].pi != 0:
         print("Restriccion activa: ", r)
+        
+# Asumiendo que 'modelo' es tu modelo de PuLP y ya ha sido resuelto
+
+# Imprimir los valores duales de todas las restricciones
+for nombre, restriccion in modelo.constraints.items():
+    print(f"El valor dual de la restricción {nombre} es: {restriccion.pi}")

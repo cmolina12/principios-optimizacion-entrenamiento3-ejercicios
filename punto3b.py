@@ -95,8 +95,3 @@ plt.xticks(capacidades)
 plt.grid(True)
 plt.show()
 
-
-pendiente = (valores_optimos[-1] - valores_optimos[0]) / (capacidades[-1] - capacidades[0])
-
-print(f'La pendiente de la recta es: {pendiente:.2f} COP/litro')
-
