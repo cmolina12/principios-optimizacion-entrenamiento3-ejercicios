@@ -7,21 +7,42 @@ P = ["Coco", "Almendra"]
 R = ["Agua", "Extracto de coco", "Pasta de almendra", "Tiempo"]
 
 # Definir parámetros
-a_coco_agua = 0.40
-a_almendra_agua = 0.47
-a_coco_extracto = 0.35
-a_almendra_pasta = 0.37
-t_coco = 3.4
-t_almendra = 2.6
-U_coco = 12000
-U_almendra = 9500
-D_agua = 42
-D_extracto = 17.8
-D_pasta = 15.2
-D_tiempo = 720
+a_coco_agua = 0.40 #Litros de agua por litro de coco
+
+a_almendra_agua = 0.47 #Litros de agua por litro de almendra
+
+a_coco_extracto = 0.35 #Litros de extracto de coco por litro de coco
+
+a_almendra_pasta = 0.37 #Litros de pasta de almendra por litro de almendra
+
+a_veggiefusion_extracto = 0.06 #Litros de extracto de coco por litro de VeggieFusion
+
+a_veggiefusion_pasta = 0.05 #Litros de pasta de almendra por litro de VeggieFusion
+
+a_veggiefusion_agua = 0.09 #Litros de agua por litro de VeggieFusion
+
+t_coco = 3.4 #Minutos por litro de coco
+
+t_almendra = 2.6 #Minutos por litro de almendra
+
+t_veggiefusion = 5.5 #Minutos por litro de VeggieFusion
+
+U_coco = 12000 #Utilidad por litro de coco
+
+U_almendra = 9500 #Utilidad por litro de almendra
+
+U_veggiefusion = 10500 #Utilidad por litro de VeggieFusion
+
+D_agua = 42 #Litros de agua disponibles
+
+D_extracto = 17.8 #Litros de extracto de coco disponibles
+
+D_pasta = 15.2 #Litros de pasta de almendra disponibles
+
+D_tiempo = 720 #Minutos disponibles
 
 # Listas para guardar los resultados
-capacidades = list(range(0, 101, 5)) # Capacidad de producción en litros
+capacidades = list(range(0, 101, 1)) # Capacidad de producción en litros
 valores_optimos = [] # Valor óptimo de la función objetivo
 
 # Iterar sobre diferentes valores de capacidad de producción
