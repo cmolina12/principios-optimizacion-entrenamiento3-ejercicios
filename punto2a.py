@@ -245,4 +245,28 @@ datos = {
 
 print(tb.tabulate(datos, headers='keys', tablefmt='fancy_grid'))
 
+#Grafico de barras para cada sucursal
+
+
+datos = {
+        
+        'Sabor': ['Vainilla', 'Fresa', 'Chocolate'],
+        
+        'Usaquén': [a.varValue, e.varValue, i.varValue],
+        
+        'Salitre': [b.varValue, f.varValue, j.varValue],
+        
+        'Chicó': [c.varValue, g.varValue, k.varValue],
+        
+        'Titán': [d.varValue, h.varValue, l.varValue]
+        
+    }
+
+df = pd.DataFrame(datos)
+
+df.plot(x = 'Sabor', kind = 'bar', title = 'Litros de helado comprados por sabor y sucursal', color = ['blue', 'red', 'green', 'purple'])
+
+plt.show()
+
+
 
