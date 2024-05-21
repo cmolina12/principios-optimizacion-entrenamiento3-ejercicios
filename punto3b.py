@@ -48,11 +48,11 @@ valores_optimos = [] # Valor óptimo de la función objetivo
 # Iterar sobre diferentes valores de capacidad de producción
 for c in capacidades: 
     # Crear el modelo
-    modelo = lp.LpProblem("VeggieDrinks", lp.LpMaximize)
+    modelo = lp.LpProblem("VeggieDrinks", lp.LpMaximize) # Definir el modelo como un problema de maximización
     
     # Definir las variables de decisión
-    x = lp.LpVariable("Litros de bebida de coco", lowBound=0, cat=lp.LpContinuous)
-    y = lp.LpVariable("Litros de bebida de almendra", lowBound=0, cat=lp.LpContinuous)
+    x = lp.LpVariable("Litros de bebida de coco", lowBound=0, cat=lp.LpContinuous) # Definir variable de decisión x
+    y = lp.LpVariable("Litros de bebida de almendra", lowBound=0, cat=lp.LpContinuous) # Definir variable de decisión y
     
     # Definir la función objetivo
     modelo += (U_coco * x) + (U_almendra * y)
@@ -86,12 +86,12 @@ for c in capacidades:
     valores_optimos.append(lp.value(modelo.objective))
 
 # Graficar la capacidad de producción vs. el valor óptimo de la función objetivo
-plt.figure(figsize=(10, 6))
-plt.plot(capacidades, valores_optimos, marker='o', linestyle='-', color='b')
-plt.title('Valor Óptimo de la Función Objetivo en Función de la Capacidad de Producción')
-plt.xlabel('Capacidad de Producción (litros)')
-plt.ylabel('Valor Óptimo de la Función Objetivo (COP)')
-plt.xticks(capacidades)
-plt.grid(True)
-plt.show()
+plt.figure(figsize=(10, 6)) # Tamaño de la figura
+plt.plot(capacidades, valores_optimos, marker='o', linestyle='-', color='b') # Graficar los datos
+plt.title('Valor Óptimo de la Función Objetivo en Función de la Capacidad de Producción') # Título del gráfico
+plt.xlabel('Capacidad de Producción (litros)') # Etiqueta del eje x
+plt.ylabel('Valor Óptimo de la Función Objetivo (COP)') # Etiqueta del eje y
+plt.xticks(capacidades) # Mostrar todas las capacidades en el eje x
+plt.grid(True)  # Mostrar la cuadrícula
+plt.show() # Mostrar el gráfico
 
